@@ -106,8 +106,72 @@ Commit the staged changes to the repository:
 
 ## 3. Merging the branches
 
-```
-git checkout branch1
+**Navigate to `main`:** First, ensure you are on the branch into which you want to merge changes. Typically, this is the `main` branch:
+
+```bash
+git checkout main
 git fetch origin
 ```
 
+**Fetch Latest Changes:** It's a good practice to fetch the latest changes from the remote repository before merging:
+
+```bash
+git fetch origin
+```
+
+**Merge Branch:** Merge the changes from the branch you want to merge (let's say `devpt`) into `main`:
+
+```bash
+git merge devpt
+```
+
+
+
+## 4. Creating patches
+
+**List all commits on a specific branch:** Replace `<branch-name>` with the name of the branch you're interested in, such as `devpt` in your case.
+
+```bash
+git log devpt (or)
+git log -n 10  # Shows the last 10 commits
+```
+
+Generate patches for the commits:
+
+```bash
+git format-patch <commit_hash> (or) # for a particular
+git format-patch <commit_hash_from>..<commit_hash_to> # for 2 or more commits
+```
+
+### 4.1 Applying the patch files
+
+If you have `.patch` files generated using `git format-patch` or another method, you can apply them using `git apply` or `git am`.
+
+#### 4.1.2 Using `git apply`
+
+1. **Navigate to your Git repository:**
+
+   ```bash
+   cd /path/to/your/repository
+   ```
+
+2. **Apply the patch using `git apply`:**
+
+   ```bash
+   git apply path/to/your/patchfile.patch
+   ```
+
+   Replace `path/to/your/patchfile.patch` with the actual path to your patch file.
+
+
+
+## 5. Reset the repo to the specific commit
+
+Use `git reset` to move the `HEAD` pointer and working directory to the specific commit you want to start from. This effectively "rewinds" your repository's state to that commit.
+
+```bash
+git log devpt
+git reset --hard <commit-hash>
+```
+
+Replace `<commit-hash>` with the hash of the commit you want to start from. This hash uniquely identifies each commit and can be found using `git log`.
