@@ -1,0 +1,15 @@
+name: Auto Request Reviewers
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  request_review:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Request Reviewers
+      uses: peter-evans/request-review-action@v2
+      with:
+        reviewers: |
+          kkraman02
