@@ -72,3 +72,10 @@ To sign your commits, add the `-S` flag to the commit command:
 git commit -S -m "Your commit message"
 ```
 
+### 7. How to check verified and unverified commits
+
+```bash
+git log --show-signature	# show verified commits
+git log
+```
+
