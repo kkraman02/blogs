@@ -9,7 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Request Reviewers
-      uses: peter-evans/request-review-action@v2
+      uses: actions/github-script@v6
       with:
-        reviewers: |
-          kkraman02
+        script: |
+          const reviewers = ['kkraman02', 'username2'];
+          const { owner, repo } = context.repo;
+          const pull_number = context.payload.pull_request.number;
+
+          await github.pulls.requestReviewers({
+            owner,
+            repo,
+            pull_number,
+            reviewers
+          });
